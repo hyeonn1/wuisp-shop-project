@@ -5,7 +5,7 @@
 <?php
 $user_id = $_SESSION['user_id'];
 
-// 회원정보 가져오기
+// 내 정보 가져오기
 $user_query = "SELECT * FROM users WHERE id = $user_id";
 $user_result = mysqli_query($conn, $user_query);
 $user = mysqli_fetch_assoc($user_result);
@@ -30,13 +30,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <h2>마이페이지</h2>
 
-<h3>회원정보 수정</h3>
-<form method="POST">
-    <input type="text" name="name" value="<?php echo $user['name']; ?>" placeholder="이름"><br>
-    <input type="text" name="address" value="<?php echo $user['address']; ?>" placeholder="주소"><br>
-    <input type="text" name="phone" value="<?php echo $user['phone']; ?>" placeholder="전화번호"><br>
-    <button type="submit">수정하기</button>
-</form>
+<h3>내 정보</h3>
+
+<?php if(!isset($_GET['edit'])) { ?>
+    이름: <?php echo $user['name']; ?><br>
+    주소: <?php echo $user['address']; ?><br>
+    전화번호: <?php echo $user['phone']; ?><br><br>
+
+    <a href="mypage.php?edit=1">수정하기</a>
+
+<?php } else { ?>
+    <form method="POST">
+        <input type="text" name="name" value="<?php echo $user['name']; ?>"><br>
+        <input type="text" name="address" value="<?php echo $user['address']; ?>"><br>
+        <input type="text" name="phone" value="<?php echo $user['phone']; ?>"><br>
+        <button type="submit">저장</button>
+    </form>
+<?php } ?>
 
 <hr>
 
@@ -50,7 +60,7 @@ if (mysqli_num_rows($order_result) > 0) {
     while ($row = mysqli_fetch_assoc($order_result)) {
         echo "<div>";
         echo "주문번호: {$row['id']}<br>";
-        echo "상품: {$row['product_names']}<br>";
+        echo "상품: {$row['product_name']}<br>";
         echo "총 가격: {$row['total_price']}원<br>";
         echo "이름: {$row['name']}<br>";
         echo "주소: {$row['address']}<br>";

@@ -9,7 +9,7 @@ $name = $_POST['name'];
 $address = $_POST['address'];
 $phone = $_POST['phone'];
 
-// 장바구니 상품 가져오기
+// 장바구니 조회
 $query = "
 SELECT products.name, products.price 
 FROM cart 
@@ -27,20 +27,21 @@ while ($row = mysqli_fetch_assoc($result)) {
     $product_names[] = $row['name'];
 }
 
-// 상품 이름 문자열로 변환
+// 배열 → 문자열
 $product_names_str = implode(", ", $product_names);
 
 // 주문 저장
 $insert = "
-INSERT INTO orders (user_id, total_price, product_names, name, address, phone)
+INSERT INTO orders (user_id, total_price, product_name, name, address, phone)
 VALUES ($user_id, $total_price, '$product_names_str', '$name', '$address', '$phone')
 ";
 
 mysqli_query($conn, $insert);
 
-// 장바구니 삭제
+// 장바구니 비우기
 $delete = "DELETE FROM cart WHERE user_id = $user_id";
 mysqli_query($conn, $delete);
 
+// 완료
 echo "<script>alert('결제 완료!'); location.href='mypage.php';</script>";
 ?>
