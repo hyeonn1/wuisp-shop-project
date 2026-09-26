@@ -17,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $phone = $_POST['phone'];
 
     $update = "
-    UPDATE users 
-    SET name='$name', address='$address', phone='$phone'
+    UPDATE users  
+    SET name='$name', address='$address', phone='$phone' 
     WHERE id=$user_id
     ";
 
@@ -41,10 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <?php } else { ?>
     <form method="POST">
-        <input type="text" name="name" value="<?php echo $user['name']; ?>"><br>
-        <input type="text" name="address" value="<?php echo $user['address']; ?>"><br>
-        <input type="text" name="phone" value="<?php echo $user['phone']; ?>"><br>
+        이름: <input type="text" name="name" value="<?php echo $user['name']; ?>"><br>
+        주소: <input type="text" name="address" value="<?php echo $user['address']; ?>"><br>
+        전화번호: <input type="text" name="phone" value="<?php echo $user['phone']; ?>"><br><br>
+
         <button type="submit">저장</button>
+        <a href="mypage.php">취소</a>
     </form>
 <?php } ?>
 
