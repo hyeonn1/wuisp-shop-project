@@ -15,7 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
-        $_SESSION['user'] = $user['username']; // 세션 저장
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username']; // 세션 저장
         echo "<script>alert('로그인 성공!'); location.href='index.php';</script>";
     } else {
         echo "<script>alert('로그인 실패. 아이디 또는 비밀번호를 확인하세요.');</script>";
