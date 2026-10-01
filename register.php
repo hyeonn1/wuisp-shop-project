@@ -1,18 +1,17 @@
 <?php include "includes/header.php"; ?>
 <?php include "includes/db.php"; ?>
-
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     // 선택 입력 (없으면 빈값)
-    $name = $_POST['name'] ?? "";
+    $name    = $_POST['name']    ?? "";
     $address = $_POST['address'] ?? "";
-    $phone = $_POST['phone'] ?? "";
+    $phone   = $_POST['phone']   ?? "";
 
     // 아이디 중복 체크
-    $check_query = "SELECT * FROM users WHERE username='$username'";
+    $check_query  = "SELECT * FROM users WHERE username='$username'";
     $check_result = mysqli_query($conn, $check_query);
 
     if (mysqli_num_rows($check_result) > 0) {
@@ -20,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         // 회원가입 INSERT (선택값 포함)
         $insert_query = "
-        INSERT INTO users (username, password, name, address, phone)
-        VALUES ('$username', '$password', '$name', '$address', '$phone')
+            INSERT INTO users (username, password, name, address, phone)
+            VALUES ('$username', '$password', '$name', '$address', '$phone')
         ";
 
         if (mysqli_query($conn, $insert_query)) {
@@ -34,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <h2>회원가입</h2>
-
 <form method="POST" action="">
     아이디: <input type="text" name="username" placeholder="아이디를 입력하세요" required><br>
     비밀번호: <input type="password" name="password" placeholder="비밀번호를 입력하세요" required><br><br>

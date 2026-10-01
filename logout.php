@@ -1,9 +1,5 @@
 <?php include "includes/header.php"; ?>
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
 // 세션 값 삭제 및 파기
 session_unset();
 session_destroy();
