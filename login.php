@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
-        $_SESSION['user_id']  = $user['id'];        // 공통 파일 기준으로 통일
+        $_SESSION['user_id']  = $user['id'];
         $_SESSION['username'] = $user['username'];
         echo "<script>alert('로그인 성공!'); location.href='index.php';</script>";
     } else {
